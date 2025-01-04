@@ -7,6 +7,25 @@ This project provides a custom KASM workspace for running [Reticulum MeshChat](h
 
 This KASM workspace provides a containerized environment for running MeshChat with a web-based interface. It's built on top of the KASM Ubuntu Jammy desktop image and includes all necessary dependencies for running MeshChat.
 
+## Why Use KASM for MeshChat?
+
+### Remote Access & Portability
+- Access your MeshChat client from any device with a web browser
+- Maintain consistent connections and configurations regardless of where you access from
+- No need to install or configure MeshChat on multiple devices
+
+### Persistent Configuration
+- Your network connections, contacts, and settings persist between sessions
+- Configuration remains consistent regardless of the device you use to access
+- Maintain continuous connectivity to your mesh network
+
+### Easy Deployment
+- Pre-configured environment with all necessary dependencies
+- No complex installation or setup required
+- Automatic startup and connection to default Reticulum network nodes
+
+This containerized approach is ideal for users who need reliable access to their mesh network from multiple locations or devices, while maintaining a consistent and persistent configuration.
+
 ## Features
 
 - Pre-configured MeshChat installation
