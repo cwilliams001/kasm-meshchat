@@ -22,8 +22,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
-# Clone and Install MeshChat
-RUN cd /opt && \
+# Clone and Install MeshChat in user's home
+RUN cd $HOME && \
     git clone https://github.com/liamcottle/reticulum-meshchat && \
     cd reticulum-meshchat && \
     npm install --omit=dev && \
@@ -31,18 +31,18 @@ RUN cd /opt && \
     pip install -r requirements.txt
 
 # Create necessary directories and set permissions
-RUN mkdir -p /opt/reticulum-meshchat/storage && \
-    mkdir -p /opt/reticulum-meshchat/.reticulum && \
-    chown -R 1000:1000 /opt/reticulum-meshchat
+RUN mkdir -p $HOME/reticulum-meshchat/.reticulum && \
+    mkdir -p $HOME/reticulum-meshchat/storage && \
+    chown -R 1000:1000 $HOME/reticulum-meshchat
 
 # Copy custom Reticulum config
-COPY config /opt/reticulum-meshchat/.reticulum/config
-RUN chown 1000:1000 /opt/reticulum-meshchat/.reticulum/config
+COPY config $HOME/reticulum-meshchat/.reticulum/config
+RUN chown 1000:1000 $HOME/reticulum-meshchat/.reticulum/config
 
 # Create startup script for MeshChat
 RUN echo '#!/bin/bash\n\
-cd /opt/reticulum-meshchat\n\
-python3 meshchat.py --headless --host=0.0.0.0 --storage-dir=/opt/reticulum-meshchat/storage --reticulum-config-dir=/opt/reticulum-meshchat/.reticulum &\n\
+cd $HOME/reticulum-meshchat\n\
+python3 meshchat.py --headless --host=0.0.0.0 --storage-dir=$HOME/reticulum-meshchat/storage --reticulum-config-dir=$HOME/reticulum-meshchat/.reticulum &\n\
 sleep 5\n\
 google-chrome --new-window http://localhost:8000' > /usr/local/bin/start-meshchat.sh && \
     chmod +x /usr/local/bin/start-meshchat.sh
