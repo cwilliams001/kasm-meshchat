@@ -19,6 +19,13 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
       
+      - name: Get MeshChat version
+        id: meshchat_version
+        run: |
+          MESHCHAT_VERSION=$(curl -s https://api.github.com/repos/liamcottle/reticulum-meshchat/releases/latest | jq -r .tag_name | sed 's/v//')
+          echo "version=$MESHCHAT_VERSION" >> $GITHUB_OUTPUT
+          echo "MeshChat version: $MESHCHAT_VERSION"
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -35,4 +42,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
-            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ steps.meshchat_version.outputs.version }}

@@ -1,3 +1,20 @@
+# KASM MeshChat Workspace
+
+[![Docker Pulls](https://img.shields.io/docker/pulls/williamsct1/kasm-meshchat)](https://hub.docker.com/r/williamsct1/kasm-meshchat)
+[![Docker Image Size](https://img.shields.io/docker/image-size/williamsct1/kasm-meshchat/latest)](https://hub.docker.com/r/williamsct1/kasm-meshchat)
+[![Docker Image Version](https://img.shields.io/docker/v/williamsct1/kasm-meshchat/latest)](https://hub.docker.com/r/williamsct1/kasm-meshchat/tags)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/cwilliams001/kasm-meshchat/docker-build-push.yml)](https://github.com/cwilliams001/kasm-meshchat/actions)
+
+## Container Registry
+
+## Container Registry
+
+The pre-built container image is available on Docker Hub:
+- [williamsct1/kasm-meshchat](https://hub.docker.com/r/williamsct1/kasm-meshchat)
+- Latest version: `docker pull williamsct1/kasm-meshchat:latest`
+- Specific version: `docker pull williamsct1/kasm-meshchat:1.18.0`
+
+> Note: The version number corresponds to the MeshChat version included in the image.
 
 # KASM MeshChat Workspace
 
