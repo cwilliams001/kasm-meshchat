@@ -14,13 +14,56 @@ This KASM workspace provides a containerized environment for running MeshChat wi
 - Customizable Reticulum network interfaces
 - Automatic startup of MeshChat service
 - Desktop shortcut for easy access
+- Persistent storage for configurations and connections
 
-## Prerequisites
+## Quick Start: Using Pre-built Image
 
+### Prerequisites
+- A running KASM Workspaces installation
+- Admin access to your KASM Workspaces instance
+
+You can find the documentation for installing a single server installation of Kasm here:
+https://kasmweb.com/docs/latest/index.html
+
+### Installation Steps
+
+1. Log into your KASM Workspaces admin interface
+
+2. Navigate to Workspaces
+   - Click on "Workspaces" in the left sidebar
+   - Click the "Add Workspace" button
+
+3. Configure the New Workspace Details
+   - **Workspace Type**: Container
+   - **Friendly Name**: MeshChat (or your preferred name)
+   - **Description**: Reticulum MeshChat Client (or your preferred description)
+   - **Thumbnail URL**: https://raw.githubusercontent.com/markqvist/Reticulum/master/docs/source/graphics/rns_logo_512.png
+   - **Docker Image**: williamsct1/kasm-meshchat:latest
+   - **Docker Registry**: https://index.docker.io/v1/
+   - **Persistent Profile Path**: `/mnt/kasm_profiles/{image_id}/{user_id}`
+   - Click "Save"
+
+4. Launch the Workspace
+   - Return to the main KASM interface
+   - Click on the MeshChat workspace icon
+   - The workspace will launch with MeshChat automatically starting
+
+5. Using MeshChat
+   - MeshChat will automatically start when the workspace launches
+   - The web interface will open automatically in Chrome
+   - Your connections and settings will persist between sessions due to the enabled persistent profile
+
+![MeshChat Demo](assets/kasm-meshchat-demo.gif)
+
+## Building Your Own Image
+
+If you want to customize the image or build it yourself:
+
+### Prerequisites
 - Docker installed on your system
-- KASM Workspaces server (if running as part of KASM infrastructure)
+- Git for cloning the repository
 
-## Building the Image
+### Building Steps
 
 1. Clone this repository:
 ```bash
@@ -49,17 +92,25 @@ The default configuration includes:
 - RNS Testnet BetweenTheBorders
 - RNS Testnet Amsterdam
 
-To modify the network interfaces, edit the `config` file in the repository before building.
+To modify the network interfaces, you can either:
+- Edit the `config` file in the repository before building
+- Or modify the config file at `home/kasm-user/reticulum-meshchat/.reticulum/config` in your running workspace
 
+### Troubleshooting
 
-### Installing in KASM Workspaces
+If MeshChat doesn't start automatically:
+1. Open a terminal in the workspace
+2. Run: `/usr/local/bin/start-meshchat.sh`
 
-1. In KASM admin interface, go to Workspaces
-2. Click "Add Workspace"
-3. Add the Docker image: `yourusername/kasm-meshchat:latest`
-4. Configure other settings as needed
-5. Save and launch the workspace
+If you need to restart MeshChat:
+1. Open a terminal
+2. Run: `pkill -f "python3 meshchat.py"`
+3. Then run: `/usr/local/bin/start-meshchat.sh`
 
+## Notes
+- The workspace uses persistent storage, so your MeshChat configuration and connections will be saved between sessions
+- The container automatically connects to default Reticulum network nodes
+- You can modify the network configuration by editing the config file at `home/kasm-user/reticulum-meshchat/.reticulum/config` or by building the container image with your interfaces.
 
 ## License
 
